@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 
 import TodoInput from 'app/components/TodoInput';
+import TodoItem from 'app/components/TodoItem';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,22 +19,28 @@ const Box = styled.div`
   background: #fff;
   box-shadow: 0px 25px 100px -60px rgba(0, 0, 0, 0.18);
 `;
+
 const Title = styled.h1`
   margin: 0;
   padding: 15px 25px;
 `;
 const TodoList = styled.div``;
-const TdoItem = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 15px 25px;
-  width: 100%;
-  font-size: 1.2em;
-  border-bottom: 1px solid #eee;
-`;
+
 const TodoCheck = styled.input`
   margin-right: 15px;
 `;
+export const TodoContent = styled.span<{ checked: boolean }>`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  cursor: text;
+  text-decoration: ${props => (props.checked ? 'line-through' : 'initial')};
+  color: ${props => (props.checked ? '#aaa' : '#212121')};
+`;
+
 export function HomePage() {
   return (
     <>
@@ -46,10 +53,30 @@ export function HomePage() {
           <Title>할 일</Title>
           <TodoInput />
           <TodoList>
-            <TdoItem>
-              <TodoCheck type="checkbox" />
-              나는 투두
-            </TdoItem>
+            <TodoItem
+              todo={{
+                id: '1',
+                completed: false,
+                content: '투두입니다 1',
+                editing: false,
+              }}
+            ></TodoItem>
+            <TodoItem
+              todo={{
+                id: '2',
+                completed: true,
+                content: '투두입니다 2',
+                editing: true,
+              }}
+            ></TodoItem>
+            <TodoItem
+              todo={{
+                id: '3',
+                completed: false,
+                content: '투두입니다 3',
+                editing: false,
+              }}
+            ></TodoItem>
           </TodoList>
         </Box>
       </Wrapper>
