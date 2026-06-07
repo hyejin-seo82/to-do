@@ -25,8 +25,9 @@ export default function CheckBox({
 }) {
   return (
     <>
-      <Circle checked={checked} onClick={onClick}></Circle>
-      {checked ? <div className="checkbox-icon" /> : null}
+      <Circle checked={checked} onClick={onClick}>
+        {checked ? <div className="checkbox-icon" /> : null}
+      </Circle>
     </>
   );
 }
